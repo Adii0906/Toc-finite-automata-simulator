@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-midnight: #0d1033;
+  --color-indigo: #1a1b5e;
+  --color-plum: #2c1f63;
+  --color-surface: #1b1e5c;
+  --color-violet: #8c7be8;
+  --color-lilac: #c4bbf2;
+  --color-cyan: #35e2f2;
+  --color-blue: #8db2ff;
+  --color-amber: #ffb46b;
+  --color-ok: #62edb5;
+  --color-no: #ff7f8e;
+  --color-fg: #f4f2fc;
+  --color-muted: #b1b3dc;
+  --color-line: rgb(196 187 242 / 0.2);
+  --color-paper: #eeedf9;
+  --color-ink: #1a1b4b;
+
+  --font-sans: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-math: "STIX Two Text Variable", "STIX Two Text", Georgia, serif;
+}
+
+@layer base {
+  html {
+    background: var(--color-midnight);
+  }
+
+  body {
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* The tables view is printed on paper, so the theme inverts locally. */
+.on-paper {
+  --color-fg: #1a1b4b;
+  --color-muted: #55588f;
+  --color-line: rgb(26 27 75 / 0.22);
+  --color-blue: #3a3fc4;
+  --color-amber: #b65a0a;
+  color: var(--color-fg);
+}
+
+.graph-paper {
+  background-image: radial-gradient(rgb(196 187 242 / 0.13) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* Graph elements take their timing from the playback speed through --beat. */
+.state-shape,
+.state-label,
+.edge-line,
+.edge-arrow,
+.edge-label,
+.start-mark {
+  transition-property: fill, stroke, stroke-width, opacity;
+  transition-duration: var(--beat, 260ms);
+  transition-timing-function: ease-out;
+}
+
+.tape-cell,
+.tape-head {
+  transition-property: color, background-color, border-color, transform, opacity;
+  transition-duration: var(--beat, 260ms);
+  transition-timing-function: cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+.table-tint {
+  transition: background-color var(--beat, 260ms) ease-out, color var(--beat, 260ms) ease-out;
+}
+
+.math {
+  font-family: var(--font-math);
+  font-feature-settings: "lnum";
+}
+
+.math sub {
+  bottom: -0.22em;
+  font-size: 0.68em;
+  font-style: normal;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
